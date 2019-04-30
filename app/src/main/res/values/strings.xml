@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">STAR Search</string>
+    <string name="pic_description">Stars poster</string>
+    <string name="edit_hint_text">Enter a player</string>
+    <string name="search_button_name">Search</string>
+    <string name="photo_button_name">Photo Search</string>
+    <string name="video_button_name">Play Video</string>
+    <string name="info_button_name">View Data</string>
+</resources>

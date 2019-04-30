@@ -1,0 +1,61 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        maven {
+            url 'https://jitpack.io'
+        }
+    }
+    dependencies {
+        classpath 'org.eclipse.jgit:org.eclipse.jgit:5.2.1.201812262042-r'
+        classpath 'com.github.cs125-illinois:gradlegrader:0.13.5'
+        classpath 'com.android.tools.build:gradle:3.3.0'
+        
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        
+    }
+}
+
+task copyFiles << {
+    if (file('.idea').exists()) {
+        copy {
+            from '.preserve/runConfigurations'
+            into '.idea/runConfigurations'
+        }
+        copy {
+            from '.preserve/inspectionProfiles'
+            into '.idea/inspectionProfiles'
+        }
+        copy {
+            from '.preserve/checkstyle-idea.xml'
+            into '.idea'
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+task checkstyleMain(type: Checkstyle) {
+    source 'app/src/main', 'lib/src/main'
+    include '**/*.java'
+    exclude '**/gen/**'
+    exclude '**/R.java'
+    exclude '**/BuildConfig.java'
+    classpath = files()
+    ignoreFailures = true
+}
+
+defaultTasks 'grade'
+
+// vim: ts=4:sw=4:et:ft=groovy
